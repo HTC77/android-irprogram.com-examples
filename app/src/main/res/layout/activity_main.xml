@@ -7,43 +7,30 @@
     android:onClick="nextBtnClicked"
     tools:context=".MainActivity">
 
-    <RadioGroup
-        android:id="@+id/rgColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginLeft="41dp"
-        android:layout_marginTop="53dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/rbRed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="Red"
-            android:textSize="30sp" />
-
-        <RadioButton
-            android:id="@+id/rbBlue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="Blue"
-            android:textSize="30sp" />
-    </RadioGroup>
-
     <Button
-        android:id="@+id/btnSetColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="251dp"
-        android:onClick="onSelectBtnClicked"
-        android:text="Select Color"
+        android:id="@+id/btnToggleImg"
+        android:layout_width="139dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="344dp"
+        android:onClick="imgBtnClicked"
+        android:text="toggle image"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img1"
+        android:layout_width="208dp"
+        android:layout_height="198dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginLeft="116dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/m_pic1" />
 </android.support.constraint.ConstraintLayout>
