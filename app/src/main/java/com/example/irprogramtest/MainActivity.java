@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
     public void onExitClicked(View v){
         AlertDialog.Builder alertBuiler = new AlertDialog.Builder(this);
         alertBuiler.setCancelable(false);
-        alertBuiler.setMessage("آیا مطمئن هستید که می خواهید خارج شوید؟");
-        alertBuiler.setPositiveButton("بله", new DialogInterface.OnClickListener() {
+        alertBuiler.setMessage("آیا مطمئن هستید که می خواهید خارج شوید؟")
+        .setPositiveButton("بله", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
