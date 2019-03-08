@@ -4,17 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="nextBtnClicked"
-    tools:context=".MainActivity">
+    android:background="@color/colorAccent"
+    tools:context=".NewActivity">
 
-    <Button
-        android:id="@+id/btnNextActivity"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
-        android:onClick="nextBtnClicked"
-        android:text="go next activity"
+        android:layout_marginTop="184dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginRight="140dp"
+        android:autoText="true"
+        android:text="Next activity"
+        android:textColor="#fff"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
