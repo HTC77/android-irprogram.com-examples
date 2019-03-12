@@ -4,16 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
     android:onClick="nextBtnClicked"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/btnFragment1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="298dp"
-        android:text="TextView Master"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginRight="137dp"
+        android:layout_marginBottom="24dp"
+        android:onClick="onFragBtnClicked"
+        android:text="fragment 1"
+        app:layout_constraintBottom_toTopOf="@+id/btnFragment2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnFragment2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="31dp"
+        android:onClick="onFragBtnClicked"
+        android:text="Fragment 2"
+        app:layout_constraintBottom_toTopOf="@+id/fragPlace"
+        app:layout_constraintStart_toStartOf="@+id/btnFragment1"
+        app:layout_constraintTop_toBottomOf="@+id/btnFragment1" />
+
+    <fragment
+        android:id="@+id/fragPlace"
+        android:name="com.example.irprogramtest.MyFragment1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnFragment2" />
 </android.support.constraint.ConstraintLayout>
