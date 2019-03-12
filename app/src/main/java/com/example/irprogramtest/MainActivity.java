@@ -1,13 +1,12 @@
 package com.example.irprogramtest;
 
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,20 +14,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onFragBtnClicked(View v){
-        Fragment fr;
-        FragmentTransaction ft;
+    public void onBtnClicked(View v){
+
         switch (v.getId()){
-            case R.id.btnFragment1:
-                fr = new MyFragment1();
-                ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragPlace,fr);
-                ft.commit();
+            case R.id.btnFragment:
+                Toast.makeText(this, "Fragment button clicked", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.btnFragment2:
-                fr = new MyFragment2();
-                ft = getFragmentManager().beginTransaction().replace(R.id.fragPlace,fr);
-                ft.commit();
+            case R.id.btnMain:
+                Toast.makeText(this, "Main Activity Button Clicked", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
