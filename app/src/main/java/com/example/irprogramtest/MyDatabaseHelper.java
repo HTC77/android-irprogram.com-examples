@@ -1,5 +1,6 @@
 package com.example.irprogramtest;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -24,5 +25,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TBL_NAME);
         onCreate(db);
+    }
+
+    boolean insertData(String name){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("Name",name);
+        return db.insert(TBL_NAME,null,cv) == -1 ? false : true;
+    }
+    boolean deleteData(String id){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("Id",id);
+        return db.delete(TBL_NAME,"Id = ?",new String[] {id}) == 0 ? false : true;
     }
 }
