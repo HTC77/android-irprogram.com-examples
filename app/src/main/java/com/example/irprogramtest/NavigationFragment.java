@@ -76,8 +76,9 @@ public class NavigationFragment extends Fragment {
                     toolbar.setAlpha(1 - slideOffset);
             }
         };
-        if (!mUserLearnedDrawer && !mFromSavedInstanceState)
-            mDrawerLayout.openDrawer(containerView);
+        // TODO uncomment + check
+        //if (!mUserLearnedDrawer && !mFromSavedInstanceState)
+        //    mDrawerLayout.openDrawer(containerView);
         mDrawerLayout.addDrawerListener(mToggle);
         mDrawerLayout.post(new Runnable() {
             @Override
