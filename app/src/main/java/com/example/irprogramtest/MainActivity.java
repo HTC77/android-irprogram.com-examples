@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
                         .findFragmentById(R.id.fragment_navigation_drawer);
         mNav.setup(R.id.fragment_navigation_drawer,(DrawerLayout) findViewById(R.id.drawer_layout),mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        
     }
 
     @Override
