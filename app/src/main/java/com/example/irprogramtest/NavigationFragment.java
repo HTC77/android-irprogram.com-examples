@@ -44,7 +44,7 @@ public class NavigationFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_navigation, container, false);
     }
 
-    public void setup(int fragmentId, DrawerLayout dl, Toolbar toolbar){
+    public void setup(int fragmentId, DrawerLayout dl, final Toolbar toolbar){
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = dl;
         mToggle = new ActionBarDrawerToggle(
@@ -67,6 +67,13 @@ public class NavigationFragment extends Fragment {
                 super.onDrawerClosed(drawerView);
 
                 getActivity().invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                if (slideOffset < 0.6)
+                    toolbar.setAlpha(1 - slideOffset);
             }
         };
         if (!mUserLearnedDrawer && !mFromSavedInstanceState)
