@@ -8,14 +8,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-    private Toolbar mToolbar;
+public class SubActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mToolbar = findViewById(R.id.app_bar);
+        setContentView(R.layout.activity_sub);
+        Toolbar mToolbar = findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
