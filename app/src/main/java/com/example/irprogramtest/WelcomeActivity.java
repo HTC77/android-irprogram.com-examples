@@ -1,6 +1,7 @@
 package com.example.irprogramtest;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -20,7 +21,8 @@ import java.util.List;
 public class WelcomeActivity extends AppCompatActivity {
     private NavigationFragment nd;
     private final String url_cat = "http://10.0.2.2/irprogram/get_cat.php";
-    private final String url_ads = "http://10.0.2.2/irprogram/get_ads.php";
+    private final String url_ads = "http://10.0.2.2/irprogram/get_ads.php?page=1";
+    private final String url_ads_by_cat = "http://10.0.2.2/irprogram/get_ads.php?cat=";
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +36,14 @@ public class WelcomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // add categories
-        makeCategoryList();
+        //makeCategoryList();
     }
 
     public void onBtnShowAdsClicked(View v){
-
+        Bundle bundle = new Bundle();
+        Intent i =new Intent(this,AdvertisementActivity.class);
+        i.putExtra("url",url_ads);
+        startActivity(i,bundle);
     }
     public void onBtnInsertAdsClicked(View v){
 
