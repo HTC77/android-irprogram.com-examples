@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,13 +36,13 @@ public class WelcomeActivity extends AppCompatActivity {
         nd.setup((DrawerLayout)findViewById(R.id.welcome_layout));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // add categories
+        // load categories
         makeCategoryList();
     }
 
     public void onBtnShowAdsClicked(View v){
         Bundle bundle = new Bundle();
-        Intent i =new Intent(this,AdvertisementActivity.class);
+        Intent i =new Intent(this,AdvertisementsActivity.class);
         i.putExtra("url",url_ads);
         startActivity(i,bundle);
     }
@@ -107,5 +108,25 @@ public class WelcomeActivity extends AppCompatActivity {
                     }
                 })
                 .setNegativeButton("خیر", null).show();
+    }
+
+    public void onBtnContactClicked(View v){
+        alertMe(getString(R.string.alert_cantact_title),
+                Html.fromHtml("<a href='mailto:a77sabeghi@gmail.com'>" +
+                        getString(R.string.alert_cantact_body)+"</a>").toString(),
+                true);
+    }
+    public void onBtnAboutClicked(View v){
+        alertMe(getString(R.string.alert_about_title),
+                        getString(R.string.alert_about_body),
+                true);
+    }
+
+    private void alertMe(String title, String body, boolean cancelabe){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setCancelable(cancelabe);
+        alert.setTitle(title);
+        alert.setMessage(body);
+        alert.show();
     }
 }

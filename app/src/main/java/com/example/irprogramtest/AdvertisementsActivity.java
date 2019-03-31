@@ -1,6 +1,7 @@
 package com.example.irprogramtest;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -10,6 +11,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AdvertisementActivity extends AppCompatActivity {
+public class AdvertisementsActivity extends AppCompatActivity {
     private static final String TAG = "MatiMessage";
     private List<HashMap<String, Object>> allAds = new ArrayList<>();
     private String url_ads;
@@ -50,6 +52,14 @@ public class AdvertisementActivity extends AppCompatActivity {
                    checkScrolLv();
             }
         });
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),AdvertisementDetailsActivity.class);
+                intent.putExtra("ads",allAds.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -66,7 +76,7 @@ public class AdvertisementActivity extends AppCompatActivity {
                 file.delete();
             }
         }catch (Exception e){
-            Log.e(TAG, "clear cache: AdvertisementActivity --> ",e );
+            Log.e(TAG, "clear cache: AdvertisementsActivity --> ",e );
         }
     }
 
@@ -83,7 +93,7 @@ public class AdvertisementActivity extends AppCompatActivity {
                 new DownloadTask().execute(url_ads + current_page);
                 current_page++;
             }catch (Exception e){
-                Log.e(TAG, "makeAdsList: AdvertisementActivity --> ",e );
+                Log.e(TAG, "makeAdsList: AdvertisementsActivity --> ",e );
             }
         }
 
@@ -116,7 +126,7 @@ public class AdvertisementActivity extends AppCompatActivity {
                 AdvertisementParser parser = new AdvertisementParser();
                 allAds.addAll(parser.parse(strings[0]));
             }catch (Exception e){
-                Log.e(TAG, "makeAdsList (ListViewLoaderTask): AdvertisementActivity --> ",e );
+                Log.e(TAG, "makeAdsList (ListViewLoaderTask): AdvertisementsActivity --> ",e );
             }
 
             String[] from = {"title", "intro", "image", "date", "cat"};
@@ -173,7 +183,7 @@ public class AdvertisementActivity extends AppCompatActivity {
 
                 return bitmap;
             }catch (Exception e){
-                Log.e(TAG, "makeAdsList (ImageDownloadTask): AdvertisementActivity --> ",e );
+                Log.e(TAG, "makeAdsList (ImageDownloadTask): AdvertisementsActivity --> ",e );
             }
             return null;
         }
