@@ -32,6 +32,7 @@ public class AdvertisementsActivity extends AppCompatActivity {
     private ListView lv;
     private int lastLastItemPos;
     private boolean goNext;
+    private boolean getByCat;
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -41,7 +42,9 @@ public class AdvertisementsActivity extends AppCompatActivity {
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         lv= findViewById(R.id.adsList);
         clearCache();
-        url_ads = getIntent().getExtras().getString("url");
+        Bundle data = getIntent().getExtras();
+        url_ads = data.getString("url");
+        getByCat = data.getBoolean("getByCat",false);
         goNext=true;
         makeAdsList();
         lastLastItemPos = lv.getLastVisiblePosition();
@@ -90,8 +93,12 @@ public class AdvertisementsActivity extends AppCompatActivity {
         if(goNext){
             goNext=false;
             try {
-                new DownloadTask().execute(url_ads + current_page);
-                current_page++;
+               if(getByCat){
+                   new DownloadTask().execute(url_ads);
+               } else{
+                   new DownloadTask().execute(url_ads + current_page);
+                   current_page++;
+               }
             }catch (Exception e){
                 Log.e(TAG, "makeAdsList: AdvertisementsActivity --> ",e );
             }

@@ -12,6 +12,7 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -23,7 +24,9 @@ public class WelcomeActivity extends AppCompatActivity {
     private NavigationFragment nd;
     private final String url_cat = "http://10.0.2.2/irprogram/get_cat.php";
     private final String url_ads = "http://10.0.2.2/irprogram/get_ads.php?page=";
-    private final String url_ads_by_cat = "http://10.0.2.2/irprogram/get_ads.php?cat=";
+    private final String url_ads_by_cat = "http://10.0.2.2/irprogram/get_ads_by_cat.php?cat=";
+    private List<HashMap<String, Object>> cats;
+    private ListView lvCat;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,19 @@ public class WelcomeActivity extends AppCompatActivity {
         nd.setup((DrawerLayout)findViewById(R.id.welcome_layout));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        lvCat = findViewById(R.id.category_list);
         // load categories
         makeCategoryList();
+        lvCat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                Intent i =new Intent(getApplicationContext(),AdvertisementsActivity.class);
+                i.putExtra("url",url_ads_by_cat+cats.get(position).get("id").toString());
+                i.putExtra("getByCat",true);
+                startActivity(i,bundle);
+            }
+        });
     }
 
     public void onBtnShowAdsClicked(View v){
@@ -78,8 +92,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
                CategoryParser parser = new CategoryParser();
 
-               List<HashMap<String, Object>> cats
-                       = new ArrayList<HashMap<String, Object>>();
+               cats = new ArrayList<HashMap<String, Object>>();
 
                cats = parser.parse(temp);
 
@@ -89,8 +102,7 @@ public class WelcomeActivity extends AppCompatActivity {
                SimpleAdapter mAdapter = new SimpleAdapter(getBaseContext(),
                        cats, R.layout.cat_list_row, from, to);
 
-               ListView lv = findViewById(R.id.category_list);
-               lv.setAdapter(mAdapter);
+               lvCat.setAdapter(mAdapter);
            }
        });
        t.start();
