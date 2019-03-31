@@ -14,6 +14,6 @@
     <string name="alert_about_title">درباره ی من</string>
     <string name="alert_about_body">درباره ی من درباره ی من درباره من</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="btn_back_title">بازگشت</string>
+    <string name="full_img_title">تصویر بزرگ</string>
 </resources>

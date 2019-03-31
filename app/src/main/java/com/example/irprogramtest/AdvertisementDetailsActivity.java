@@ -1,12 +1,17 @@
 package com.example.irprogramtest;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +28,8 @@ public class AdvertisementDetailsActivity extends AppCompatActivity {
     private TextView tvAdsPhone;
     private TextView tvAdsCat;
     private TextView tvAdsDate;
+    private static final String TAG = "HTC_EXC";
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +80,31 @@ public class AdvertisementDetailsActivity extends AppCompatActivity {
 
     public void onBtnBackClicked(View v){
         finish();
+    }
+    public void onImgClicked(View v){
+        try {
+            AlertDialog.Builder imageLoader = new AlertDialog.Builder(this);
+            LayoutInflater inflater =
+                    (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.full_screen_image,
+                    (ViewGroup) findViewById(R.id.imgFullAdsDetailsRoot));
+            ImageView bigImage = layout.findViewById(R.id.imgFullAdsDetails);
+            bigImage.setImageDrawable(imgAds.getDrawable());
+            TextView tvTitle = layout.findViewById(R.id.tvFullImgTitle);
+            tvTitle.setText(R.string.full_img_title);
+
+            imageLoader.setPositiveButton(R.string.btn_back_title,
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            imageLoader.setView(layout);
+            imageLoader.setCancelable(true);
+            imageLoader.show();
+        }catch (Exception e){
+            Log.e(TAG, "onImgClicked: ",e );
+        }
     }
 }

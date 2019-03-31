@@ -2,6 +2,7 @@ package com.example.irprogramtest;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -9,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private final String url_ads_by_cat = "http://10.0.2.2/irprogram/get_ads_by_cat.php?cat=";
     private List<HashMap<String, Object>> cats;
     private ListView lvCat;
+    private static final String TAG = "MatiMessage";
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,29 +86,33 @@ public class WelcomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private class DownloadCats extends AsyncTask<String,Void,String>{
+        @Override
+        protected String doInBackground(String... strings) {
+            String data="";
+            try {
+                JSONDownloader jd = new JSONDownloader();
+                data = jd.downloadURL(strings[0]);
+            }catch (Exception e){
+                Log.e(TAG, "DownloadCats: WelcomeActivity --> ",e );
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String json) {
+            CategoryParser parser = new CategoryParser();
+            cats = new ArrayList<HashMap<String, Object>>();
+            cats = parser.parse(json);
+            String[] from ={"name", "amount"};
+            int[] to ={R.id.tvNameCat, R.id.tvAmountCat};
+            SimpleAdapter mAdapter = new SimpleAdapter(getBaseContext(),
+                    cats, R.layout.cat_list_row, from, to);
+            lvCat.setAdapter(mAdapter);
+        }
+    }
     public void makeCategoryList(){
-       Thread t = new Thread(new Runnable() {
-           @Override
-           public void run() {
-               JSONDownloader jd = new JSONDownloader();
-               String temp = jd.downloadURL(url_cat);
-
-               CategoryParser parser = new CategoryParser();
-
-               cats = new ArrayList<HashMap<String, Object>>();
-
-               cats = parser.parse(temp);
-
-               String[] from ={"name", "amount"};
-               int[] to ={R.id.tvNameCat, R.id.tvAmountCat};
-
-               SimpleAdapter mAdapter = new SimpleAdapter(getBaseContext(),
-                       cats, R.layout.cat_list_row, from, to);
-
-               lvCat.setAdapter(mAdapter);
-           }
-       });
-       t.start();
+       new DownloadCats().execute(url_cat);
     }
 
     @Override

@@ -25,13 +25,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
             <ImageView
                 android:id="@+id/imgAdsDetails"
-                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="270dp"
+                android:layout_gravity="center"
+                android:maxHeight="370dp"
                 android:minHeight="270dp"
-                android:maxHeight="370dp"/>
+                android:onClick="onImgClicked" />
             <TextView
                 android:id="@+id/tvTitleAdsDetails"
                 android:layout_width="match_parent"
