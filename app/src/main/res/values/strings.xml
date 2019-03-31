@@ -8,6 +8,7 @@
     <string name="about_us">درباره ی من</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="cats_title">دسته بندی</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="btn_back_title">بازگشت</string>

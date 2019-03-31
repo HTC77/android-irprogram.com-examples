@@ -40,7 +40,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_exit_name" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cats_title"
+            android:textSize="24sp"
+            android:textColor="@color/title"/>
         <ListView
             android:id="@+id/category_list"
             android:layout_width="match_parent"

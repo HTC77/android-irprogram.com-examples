@@ -21,7 +21,7 @@ import java.util.List;
 public class WelcomeActivity extends AppCompatActivity {
     private NavigationFragment nd;
     private final String url_cat = "http://10.0.2.2/irprogram/get_cat.php";
-    private final String url_ads = "http://10.0.2.2/irprogram/get_ads.php?page=1";
+    private final String url_ads = "http://10.0.2.2/irprogram/get_ads.php?page=";
     private final String url_ads_by_cat = "http://10.0.2.2/irprogram/get_ads.php?cat=";
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -36,7 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // add categories
-        //makeCategoryList();
+        makeCategoryList();
     }
 
     public void onBtnShowAdsClicked(View v){

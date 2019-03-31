@@ -19,12 +19,13 @@ public class AdvertisementParser {
             JSONArray jArr = jObj.getJSONArray("ads");
             for (int i = 0; i < jArr.length(); i++) {
                 JSONObject temp = jArr.getJSONObject(i);
-                HashMap<String,Object> ads = new HashMap<>();
+                HashMap<String,Object> ads = new HashMap<String,Object>();
 
                 ads.put("id", temp.getString("id"));
                 ads.put("title", temp.getString("title"));
                 ads.put("intro", temp.getString("intro"));
                 ads.put("desc", temp.getString("desc"));
+                ads.put("image", R.drawable.download);
                 ads.put("imagePath", temp.getString("image"));
                 ads.put("seller", temp.getString("seller"));
                 ads.put("email", temp.getString("email"));
