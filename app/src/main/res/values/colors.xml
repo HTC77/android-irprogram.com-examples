@@ -6,4 +6,5 @@
     <color name="colorDrawer">#03A9F4</color>
     <color name="colorDesc2">#035EA3</color>
     <color name="title">#05050E</color>
+    <color name="black">#000</color>
 </resources>

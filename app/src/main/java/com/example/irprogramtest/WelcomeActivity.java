@@ -2,6 +2,8 @@ package com.example.irprogramtest;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private final String url_cat = "http://10.0.2.2/irprogram/get_cat.php";
     private final String url_ads = "http://10.0.2.2/irprogram/get_ads.php?page=";
     private final String url_ads_by_cat = "http://10.0.2.2/irprogram/get_ads_by_cat.php?cat=";
+    private final String url_insert_ads = "http://10.0.2.2/irprogram/set_data.php";
     private List<HashMap<String, Object>> cats;
     private ListView lvCat;
     private static final String TAG = "MatiMessage";
@@ -36,35 +39,82 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        checkConnection();
+    }
+    private void checkConnection() {
+        if(isConnected()){
+            // load categories
+            makeCategoryList();
+            nd =(NavigationFragment)
+                    getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+            nd.setup((DrawerLayout)findViewById(R.id.welcome_layout));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        nd =(NavigationFragment)
-                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        nd.setup((DrawerLayout)findViewById(R.id.welcome_layout));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            lvCat = findViewById(R.id.category_list);
 
-        lvCat = findViewById(R.id.category_list);
-        // load categories
-        makeCategoryList();
-        lvCat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bundle bundle = new Bundle();
-                Intent i =new Intent(getApplicationContext(),AdvertisementsActivity.class);
-                i.putExtra("url",url_ads_by_cat+cats.get(position).get("id").toString());
-                i.putExtra("getByCat",true);
-                startActivity(i,bundle);
-            }
-        });
+            lvCat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Bundle bundle = new Bundle();
+                    Intent i =new Intent(getApplicationContext(),AdvertisementsActivity.class);
+                    i.putExtra("url",url_ads_by_cat+cats.get(position).get("id").toString());
+                    i.putExtra("getByCat",true);
+                    startActivity(i,bundle);
+                }
+            });
+        }else {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setCancelable(false);
+            alert.setTitle(R.string.internet_error_title);
+            alert.setMessage(R.string.internet_error);
+            alert.setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    checkConnection();
+                }
+            });
+            alert.setNegativeButton(R.string.btn_back_title, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            alert.show();
+        }
     }
 
+    private boolean isConnected(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo[] ni = cm.getAllNetworkInfo();
+        for (NetworkInfo nInfo :
+                ni)
+            if (nInfo.getState() == NetworkInfo.State.CONNECTED)
+                return true;
+
+        return false;
+    }
     public void onBtnShowAdsClicked(View v){
-        Bundle bundle = new Bundle();
         Intent i =new Intent(this,AdvertisementsActivity.class);
         i.putExtra("url",url_ads);
-        startActivity(i,bundle);
+        startActivity(i);
     }
     public void onBtnInsertAdsClicked(View v){
+        Intent intent =new Intent(this,InsertAdvertisementActivity.class);
+        intent.putExtra("url",url_insert_ads);
 
+        String[] id = new String[cats.size()];
+        String[] name = new String[cats.size()];
+        int i=0;
+        for (HashMap<String, Object> cat :
+                cats) {
+            id[i] = cat.get("id").toString();
+            name[i++] =cat.get("name").toString();
+        }
+        intent.putExtra("cat_id",id);
+        intent.putExtra("cat_name",name);
+
+        startActivity(intent);
     }
     public void onBtnExitClicked(View v){
        onBackPressed();

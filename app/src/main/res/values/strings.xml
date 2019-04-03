@@ -16,4 +16,34 @@
 
     <string name="btn_back_title">بازگشت</string>
     <string name="full_img_title">تصویر بزرگ</string>
+    <string name="insert_ads_title">درج آگهی</string>
+
+    <string name="insert_ads_form_title">عنوان</string>
+    <string name="insert_ads_form_intro">معرفی</string>
+    <string name="insert_ads_form_desc">توضیحات</string>
+    <string name="insert_ads_form_seller">فروشنده</string>
+    <string name="insert_ads_form_email">پست الکترونیک</string>
+    <string name="insert_ads_form_phone">تلفن</string>
+    <string name="insert_ads_form_cat">دسته</string>
+    <string name="insert_ads_form_picture">تصویر</string>
+    <string name="insert_ads_form_error_text">مقدار وارد نشده...</string>
+    <string name="insert_ads_form_error_cat">دسته انتخاب نشده</string>
+    <string name="insert_ads_form_select_cat">انتخاب نشده</string>
+    <string name="insert_ads_form_error_img">تصویر انتخاب نشده</string>
+    <string name="insert_ads_form_select_img">انتخاب نشده</string>
+
+    <string name="insert_ads_form_error_camera">خطا در گرفتن تصویر</string>
+    <string name="no_camera_error">دوربین یافت نشد</string>
+    <string name="captured_img_title">تصویر گرفته شده</string>
+    <string name="captured_img_again">دوباره</string>
+    <string name="captured_img_submit">تأیید</string>
+    <string name="captured_img_submited"></string>
+
+    <string name="send_result_title"></string>
+    <string name="send_result_success">آگهی با موفقیت ذخیره شد</string>
+    <string name="send_result_failure">خطا در ذخیره آگهی</string>
+
+    <string name="internet_error_title">خطا در اتصال</string>
+    <string name="internet_error">خطا در برقراری ارتباط با اینترنت</string>
+    <string name="retry">تلاش مجدد</string>
 </resources>

@@ -83,7 +83,7 @@ public class AdvertisementDetailsActivity extends AppCompatActivity {
     }
     public void onImgClicked(View v){
         try {
-            AlertDialog.Builder imageLoader = new AlertDialog.Builder(this);
+            final AlertDialog.Builder imageLoader = new AlertDialog.Builder(this);
             LayoutInflater inflater =
                     (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.full_screen_image,
