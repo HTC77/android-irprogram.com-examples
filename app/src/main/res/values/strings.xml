@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">IrProgramTest</string>
+    <string name="app_name">کتابچه</string>
+    <string name="m_nastaliq_font_1">nastaliq.ttf</string>
+    <string name="m_nastaliq_font_2">IranNastaliq.ttf</string>
+    <string name="about_me_title">درباره من</string>
+    <string name="about_me_message">متیما یوسفی راد</string>
+    <string name="contact_me_title">تماس با من</string>
+    <string name="contact_me_message">vinousEng@gmail.com</string>
 </resources>
