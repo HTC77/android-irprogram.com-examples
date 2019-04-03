@@ -5,6 +5,19 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".IndexActivity">
+        tools:context=".IndexActivity"
+        android:padding="10dp">
 
+    <ListView
+            android:id="@+id/lvBooksIndex"
+            android:layout_width="match_parent"
+              android:layout_height="match_parent"></ListView>
+    <Button
+            android:text="@string/back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/button" android:onClick="onBtnBackClicked"/>
 </android.support.constraint.ConstraintLayout>
