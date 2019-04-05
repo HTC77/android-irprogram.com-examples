@@ -28,13 +28,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBtnIndexClicked(View v){
-        startActivity(new Intent(this,IndexActivity.class));
+        Intent intent = new Intent(this,IndexActivity.class);
+        intent.putExtra("getFavorites",false);
+        startActivity(intent);
     }
     public void onBtnFavoriteClicked(View v){
-
+        Intent intent = new Intent(this,IndexActivity.class);
+        intent.putExtra("getFavorites",true);
+        startActivity(intent);
     }
     public void onBtnSearchClicked(View v){
-
+        startActivity(new Intent(this,SearchActivity.class));
     }
     public void onBtnSettingClicked(View v){
 

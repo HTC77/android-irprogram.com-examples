@@ -17,6 +17,8 @@ public class IndexActivity extends AppCompatActivity {
     private ListView lvBooksIndex;
     private DatabaseHandler db;
     private List<HashMap<String,Object>> books;
+    private boolean getFavorites;
+    private static final String TAG = "HTC_EXC";
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class IndexActivity extends AppCompatActivity {
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         lvBooksIndex = findViewById(R.id.lvBooksIndex);
         db = new DatabaseHandler(this);
+        getFavorites = getIntent().getExtras().getBoolean("getFavorites");
 
         getData();
 
@@ -45,7 +48,7 @@ public class IndexActivity extends AppCompatActivity {
 
     private void getData(){
         db.open();
-        books = db.getBooks();
+        books = getFavorites ? db.getFavoriteBooks() : db.getBooks();
         String[] from = {"title", "author", "fav_flag", "see_flag"};
         int[] to = {R.id.tvTitleIndex, R.id.tvAuthorIndex,
                 R.id.imgSetFavIndex,R.id.imgSetSeeIndex};

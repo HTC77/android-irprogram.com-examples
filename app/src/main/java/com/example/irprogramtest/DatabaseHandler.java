@@ -108,6 +108,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return allData;
     }
 
+    public List<HashMap<String,Object>> getFavoriteBooks(){
+        Cursor result = db.rawQuery("SELECT * FROM "+TBL_BOOKS+" WHERE fav_flag='1'",
+                null);
+        List<HashMap<String,Object>> allData = new ArrayList<>();
+        while (result.moveToNext()){
+            HashMap<String,Object> temp = new HashMap<>();
+            temp.put("id",result.getString(0));
+            temp.put("title",result.getString(1));
+            temp.put("author",result.getString(3));
+            temp.put("fav_flag",result.getString(5).equals("1")?
+                    R.drawable.is_favorite:
+                    R.drawable.not_favorite);
+            temp.put("see_flag",result.getString(6).equals("1")?
+                    R.drawable.see:
+                    R.drawable.not_see);
+
+            allData.add(temp);
+        }
+        return allData;
+    }
+
     public HashMap<String,Object> getContentOfBook(String id){
         Cursor result = db.rawQuery(
           "SELECT * FROM " + TBL_BOOKS + " WHERE id = '"+id+"' ",null);
@@ -157,5 +178,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         );
         result.moveToFirst();
         return Integer.parseInt(result.getString(6));
+    }
+
+    public List<HashMap<String, Object>> getResultOfSearch(String condition) {
+        Cursor result = db.rawQuery("SELECT * FROM "+TBL_BOOKS+
+                " WHERE "+condition,
+                null);
+        List<HashMap<String,Object>> allData = new ArrayList<>();
+        while (result.moveToNext()){
+            HashMap<String,Object> temp = new HashMap<>();
+            temp.put("id",result.getString(0));
+            temp.put("title",result.getString(1));
+            temp.put("author",result.getString(3));
+            temp.put("fav_flag",result.getString(5).equals("1")?
+                    R.drawable.is_favorite:
+                    R.drawable.not_favorite);
+            temp.put("see_flag",result.getString(6).equals("1")?
+                    R.drawable.see:
+                    R.drawable.not_see);
+
+            allData.add(temp);
+        }
+        return allData;
     }
 }

@@ -7,4 +7,11 @@
     <string name="contact_me_title">تماس با من</string>
     <string name="contact_me_message">vinousEng@gmail.com</string>
     <string name="back">بازگشت</string>
+    <string name="search_title">متن مورد نظر را وارد کنید</string>
+    <string name="search_btn_title">بیاب</string>
+    <string name="search_as_content">بر اساس محتوا</string>
+    <string name="search_as_author">بر اساس نویسنده</string>
+    <string name="search_as_title">بر اساس عنوان</string>
+    <string name="search_error">متن جستجو را وارد کنید</string>
+    <string name="search_not_found">نتیجه ای پیدا نشد</string>
 </resources>
