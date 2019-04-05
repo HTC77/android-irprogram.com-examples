@@ -1,5 +1,6 @@
 package com.example.irprogramtest;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -105,5 +106,56 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             allData.add(temp);
         }
         return allData;
+    }
+
+    public HashMap<String,Object> getContentOfBook(String id){
+        Cursor result = db.rawQuery(
+          "SELECT * FROM " + TBL_BOOKS + " WHERE id = '"+id+"' ",null);
+
+        result.moveToFirst();
+
+        HashMap<String,Object> allData = new HashMap<>();
+
+        allData.put("id",result.getString(0));
+        allData.put("title",result.getString(1));
+        allData.put("content",result.getString(2));
+        allData.put("author",result.getString(3));
+        allData.put("date",result.getString(4));
+        allData.put("fav_flag",result.getString(5).equals("1")?
+                R.drawable.is_favorite:
+                R.drawable.not_favorite);
+        allData.put("see_flag",result.getString(6).equals("1")?
+                R.drawable.see:
+                setBookVisitState(id,1) ? R.drawable.see : R.drawable.not_see);
+
+        return allData;
+    }
+
+    public boolean setBookVisitState(String id, int state){
+        ContentValues cv = new ContentValues();
+        cv.put("see_flag",state);
+        long result = db.update(TBL_BOOKS, cv, "id = ?",new String[]{id});
+        return result < 0 ? false : true;
+    }
+    public boolean setBookFavoriteState(String id, int state){
+        ContentValues cv = new ContentValues();
+        cv.put("fav_flag",state);
+        long result = db.update(TBL_BOOKS, cv, "id = ?",new String[]{id});
+        return result < 0 ? false : true;
+    }
+
+    public int getBookFavoriteState(int id){
+        Cursor result = db.rawQuery(
+          "SELECT * FROM "+TBL_BOOKS+" WHERE id = '"+id+"'",null
+        );
+        result.moveToFirst();
+        return Integer.parseInt(result.getString(5));
+    }
+    public int getBookVisitState(int id){
+        Cursor result = db.rawQuery(
+                "SELECT * FROM "+TBL_BOOKS+" WHERE id = '"+id+"'",null
+        );
+        result.moveToFirst();
+        return Integer.parseInt(result.getString(6));
     }
 }

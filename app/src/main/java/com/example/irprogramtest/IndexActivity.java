@@ -24,20 +24,9 @@ public class IndexActivity extends AppCompatActivity {
         setContentView(R.layout.activity_index);
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         lvBooksIndex = findViewById(R.id.lvBooksIndex);
-
         db = new DatabaseHandler(this);
 
-        db.open();
-        books = db.getBooks();
-        String[] from = {"title", "author", "fav_flag", "see_flag"};
-        int[] to = {R.id.tvTitleIndex, R.id.tvAuthorIndex,
-                R.id.imgSetFavIndex,R.id.imgSetSeeIndex};
-        SimpleAdapter adapter = new SimpleAdapter(
-                getBaseContext(), books,
-                R.layout.row_index_book,
-                from,to);
-        lvBooksIndex.setAdapter(adapter);
-        db.close();
+        getData();
 
         lvBooksIndex.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -52,5 +41,25 @@ public class IndexActivity extends AppCompatActivity {
 
     public void onBtnBackClicked(View v){
         finish();
+    }
+
+    private void getData(){
+        db.open();
+        books = db.getBooks();
+        String[] from = {"title", "author", "fav_flag", "see_flag"};
+        int[] to = {R.id.tvTitleIndex, R.id.tvAuthorIndex,
+                R.id.imgSetFavIndex,R.id.imgSetSeeIndex};
+        SimpleAdapter adapter = new SimpleAdapter(
+                getBaseContext(), books,
+                R.layout.row_index_book,
+                from,to);
+        lvBooksIndex.setAdapter(adapter);
+        db.close();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
     }
 }
