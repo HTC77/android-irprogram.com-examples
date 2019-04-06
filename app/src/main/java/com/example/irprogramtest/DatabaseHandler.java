@@ -201,4 +201,48 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         return allData;
     }
+
+    public int getFontSize(){
+        Cursor result = db.rawQuery(
+                 "SELECT * FROM " + TBL_SETTINGS + " WHERE `key`='font_size' ",
+                null
+        );
+        result.moveToFirst();
+        return Integer.parseInt(result.getString(2));
+    }
+    public int getSoundState(){
+        Cursor result = db.rawQuery(
+                 "SELECT * FROM " + TBL_SETTINGS + " WHERE `key`='sound' ",
+                null
+        );
+        result.moveToFirst();
+        return Integer.parseInt(result.getString(2));
+    }
+    public int getScreenState(){
+        Cursor result = db.rawQuery(
+                 "SELECT * FROM " + TBL_SETTINGS + " WHERE `key`='screen' ",
+                null
+        );
+        result.moveToFirst();
+        return Integer.parseInt(result.getString(2));
+    }
+
+    public boolean setSoundState(int state){
+        ContentValues cv = new ContentValues();
+        cv.put("value",state);
+        long result = db.update(TBL_SETTINGS,cv,"key = ?",new String[]{"sound"});
+        return result < 0 ? false : true;
+    }
+    public boolean setScreeState(int state){
+        ContentValues cv = new ContentValues();
+        cv.put("value",state);
+        long result = db.update(TBL_SETTINGS,cv,"key = ?",new String[]{"screen"});
+        return result < 0 ? false : true;
+    }
+    public boolean setFontSize(int size){
+        ContentValues cv = new ContentValues();
+        cv.put("value",size);
+        long result = db.update(TBL_SETTINGS,cv,"key = ?",new String[]{"font_size"});
+        return result < 0 ? false : true;
+    }
 }

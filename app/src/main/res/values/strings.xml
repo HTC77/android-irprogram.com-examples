@@ -14,4 +14,12 @@
     <string name="search_as_title">بر اساس عنوان</string>
     <string name="search_error">متن جستجو را وارد کنید</string>
     <string name="search_not_found">نتیجه ای پیدا نشد</string>
+    <string name="sound_settings">وضعیت پخش صدا:</string>
+    <string name="sound_settings_on">در حال پخش</string>
+    <string name="sound_settings_off">متوقف</string>
+    <string name="screen_light_settings">وضعیت نور صفحه:</string>
+    <string name="screen_light_settings_on">همیشه روشن</string>
+    <string name="screen_light_settings_normal">معمولی</string>
+    <string name="font_size_settings">اندازه متن</string>
+    <string name="font_size_settings_sample">متن نمونه</string>
 </resources>

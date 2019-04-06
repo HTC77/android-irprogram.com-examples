@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this,SearchActivity.class));
     }
     public void onBtnSettingClicked(View v){
-
+        startActivity(new Intent(this,SettingsActivity.class));
     }
     public void onBtnAboutMeClicked(View v){
         alertMe(getString(R.string.about_me_title)
