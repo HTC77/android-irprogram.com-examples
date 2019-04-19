@@ -25,7 +25,6 @@ public class BookContentActivity extends AppCompatActivity {
     private ImageView imgFav, imgVisit, imgShare;
     private MediaPlayer player;
     private boolean playerState;
-    private static Activity sActivity = null;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -58,9 +57,9 @@ public class BookContentActivity extends AppCompatActivity {
                     book.get("content").toString() +
                     "</body>" +
                 "</html>";
-        webViewContent.loadData(mainText,
+        webViewContent.loadDataWithBaseURL(null,mainText,
                 "text/html; charset=utf8",
-                null);
+                null,null);
         webViewContent.setBackgroundColor(0x00000000);
         imgFav.setImageResource(
                 Integer.parseInt(book.get("fav_flag").toString())
@@ -130,15 +129,7 @@ public class BookContentActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TEXT, book.get("content").toString());
         startActivity(Intent.createChooser(intent, "sending"));
     }
-    public static boolean isScreenRound() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (sActivity.getResources().getConfiguration().isScreenRound()) {
-                return true;
-            }
-        }
 
-        return false;
-    }
     public void onBtnBackClick(View v) {
         finish();
     }
