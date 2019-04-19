@@ -38,12 +38,14 @@ public class IndexActivity extends AppCompatActivity {
                 String mId = books.get(position).get("id").toString();
                 intent.putExtra("id",mId);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
     }
 
     public void onBtnBackClicked(View v){
         finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 
     private void getData(){

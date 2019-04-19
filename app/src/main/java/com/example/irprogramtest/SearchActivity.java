@@ -36,6 +36,7 @@ public class SearchActivity extends AppCompatActivity {
                 String mId = searchResult.get(position).get("id").toString();
                 intent.putExtra("id",mId);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
     }
@@ -51,6 +52,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public void onBtnBackFromSearchClicked(View v){
         finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
     public void onBtnFindClicked(View v){
         if (etSearch.getText().length()<1){

@@ -55,6 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void onBtnBackOfSettingClicked(View v){
         finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 
     public void onImgSoundStateClicked(View v){

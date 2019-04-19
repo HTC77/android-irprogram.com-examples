@@ -1,6 +1,5 @@
 package com.example.irprogramtest;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -128,10 +127,12 @@ public class BookContentActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
         intent.putExtra(Intent.EXTRA_TEXT, book.get("content").toString());
         startActivity(Intent.createChooser(intent, "sending"));
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 
     public void onBtnBackClick(View v) {
         finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 
     @Override

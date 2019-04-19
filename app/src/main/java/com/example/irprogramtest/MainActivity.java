@@ -31,17 +31,21 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,IndexActivity.class);
         intent.putExtra("getFavorites",false);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
     public void onBtnFavoriteClicked(View v){
         Intent intent = new Intent(this,IndexActivity.class);
         intent.putExtra("getFavorites",true);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
     public void onBtnSearchClicked(View v){
         startActivity(new Intent(this,SearchActivity.class));
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
     public void onBtnSettingClicked(View v){
         startActivity(new Intent(this,SettingsActivity.class));
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
     public void onBtnAboutMeClicked(View v){
         alertMe(getString(R.string.about_me_title)
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBtnWebsiteClicked(View v){
         startActivity(new Intent(Intent.ACTION_VIEW,
                 Uri.parse("http://www.irprogram.com")));
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
     public void onBtnContactMeClicked(View v){
         alertMe(getString(R.string.contact_me_title)
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onBtnExitClicked(View v){
         finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 
     private void alertMe(String title, String message, boolean cancelabe){
