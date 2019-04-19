@@ -1,0 +1,123 @@
+﻿﻿<html>
+    <head>
+        <meta charset="utf-8" />
+
+        <title>test page</title>
+                       
+        <script type="text/javascript">
+            function send_data_to_server()
+            {
+                document.getElementById('ResultData').innerHTML = "please wait...";
+
+                var title = document.getElementById('title').value;
+                var intro = document.getElementById('intro').value;
+                var desc  = document.getElementById('desc').value;
+                var seller= document.getElementById('seller').value;
+                var email = document.getElementById('email').value;
+                var phone = document.getElementById('phone').value;
+                var cat   = document.getElementById('cat').value;
+                var image = document.getElementById('image').value;
+
+                var data = new FormData();
+
+                data.append('title', title);
+                data.append('intro', intro);
+                data.append('desc', desc);
+                data.append('seller', seller);
+                data.append('email', email);
+                data.append('phone', phone);
+                data.append('cat', cat);
+                data.append('image', image);
+
+                var request = new XMLHttpRequest();
+
+                request.addEventListener('readystatechange',
+                    function (event)
+                    {
+                        if(this.readyState == 4)
+                        {
+                            if (this.status == 200)
+                            {
+                                var answer = eval(this.response);
+                                document.getElementById('ResultData').innerHTML = answer;
+                            }else{
+                                document.getElementById('ResultData').innerHTML = "<b>status is not 200 but: </b>"+this.status+"  <p style = 'color:red'> Note: connect via localhost or site address</p><span> or check requested page name</span>";
+                            }
+                        }else{
+                                document.getElementById('ResultData').innerHTML = "<b>ready state is not 4 </b>";
+                        }
+                    }
+                );
+
+                request.open('POST', 'set_data.php', true);
+
+                request.send(data);
+            }
+        </script>
+    </head>
+
+    <body  style="font-size: 24;">
+        <center>
+            <h3><a href="http://irprogram.matirad.com">Back To Home Page!</a><h3>
+
+            <h3>this page is for testing this page: <i>set_data.php</i></h3>
+
+            <table>
+                <tr>
+                    <td>title: </td>
+                    <td><input type="text" name="title" id="title" /></td>
+                    <td>like mobile nokia</td>
+                </tr>
+
+                <tr>
+                    <td>intro: </td>
+                    <td><input type="text" name="intro" id="intro" /></td>
+                    <td>like nokia 1100</td>
+                </tr>
+
+                <tr>
+                    <td>desc: </td>
+                    <td><input type="text" name="desc" id="desc" /></td>
+                    <td>like this is a good mobile</td>
+                </tr>
+
+                <tr>
+                    <td>seller: </td>
+                    <td><input type="text" name="seller" id="seller" /></td>
+                    <td>like Matima Yousefi rad</td>
+                </tr>
+
+                <tr>
+                    <td>email: </td>
+                    <td><input type="text" name="email" id="email" /></td>
+                    <td>like VinousEng@Gmail.Com</td>
+                </tr>
+
+                <tr>
+                    <td>phone: </td>
+                    <td><input type="text" name="phone" id="phone" /></td>
+                    <td>like 9336734230</td>
+                </tr>
+
+                <tr>
+                    <td>cat id: </td>
+                    <td><input type="text" name="cat" id="cat" /></td>
+                    <td>like 1 or 2</td>
+                </tr>
+
+                <tr>
+                    <td>image: </td>
+                    <td><input type="text" name="image" id="image" /></td>
+                    <td>like <a href="example_encoded_image.html" target="_blank">example image code</a></td>
+                </tr>
+
+                <tr>
+                    <td><input type="button" value="click" onclick="send_data_to_server();" /></td>
+                    <td><b><div id="ResultData" name="ResultData"></div></b></td>
+                </tr>
+            </table>
+			<h3>created by <b>Matima Yousefi Rad</b> - <i>VinousEng@Gmail.Com</i><h3>
+			<h3><a href="http://www.irprogram.com">www.irprogram.com</a><h3>
+        </center>
+    </body>
+</html>
