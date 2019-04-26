@@ -7,6 +7,10 @@
     <color name="from">#777777</color>
     <color name="message">#272727</color>
     <color name="bgMessageFrom">#e5e7eb</color>
-    <color name="bgMessageTo">#5eb964</color>
+    <color name="bgMessageYou">#5eb964</color>
     <color name="white">#ffffff</color>
+    <color name="message_input">#e8e8e8</color>
+    <color name="message_input_bg">#626262</color>
+    <color name="btn_send">#1e6258</color>
+
 </resources>
