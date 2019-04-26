@@ -3,4 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="black">#000000</color>
+    <color name="from">#777777</color>
+    <color name="message">#272727</color>
+    <color name="bgMessageFrom">#e5e7eb</color>
+    <color name="bgMessageTo">#5eb964</color>
+    <color name="white">#ffffff</color>
 </resources>
